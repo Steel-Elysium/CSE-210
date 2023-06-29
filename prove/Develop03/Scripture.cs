@@ -3,7 +3,7 @@ using System;
 namespace Memorize{
 class Scripture{
     ///<summary>
-    /// 
+    /// This will 
     ///</summary>
     private List<Word> _words;
     public Scripture(){
@@ -39,9 +39,11 @@ class Scripture{
         Random randNum = new Random(date.Millisecond);
         for(int i = 0; i < amountToHide; i++){
             int nextNum;
+            int errorCheck = 0;
             do{
                 nextNum = randNum.Next(_words.Count - 1);
-            }while(_words[nextNum].isHidden());
+                errorCheck++;
+            }while(_words[nextNum].isHidden()||errorCheck > 15);
             _words[nextNum].Hide();
         }
     }
@@ -51,11 +53,13 @@ class Scripture{
         for(int i = 0; i < 3; i++){
             int nextNum;
             x = 0;
+            int errorCheck = 0;
             do{
                 x++;
                 nextNum = randNum.Next(_words.Count - 1);
+                errorCheck++;
                 Console.Out.WriteLine(x);
-            }while(_words[nextNum].isHidden());
+            }while(_words[nextNum].isHidden()||errorCheck > 15);
             _words[nextNum].Hide();
         }
     }

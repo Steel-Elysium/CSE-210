@@ -1,9 +1,10 @@
 using System;
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Hello Develop04 World!");
+namespace Develop4{
+class Program{
+    static void Main(string[] args){
+        Console.Out.WriteLine("Hello Develop04 World!");
+        
     }
+}
 }

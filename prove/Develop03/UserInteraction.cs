@@ -2,15 +2,15 @@ using System;
 namespace Memorize{
 static class UserInteraction{
     ///<summary>
-    ///
+    /// This will take in and parse the user data
     ///</summary>
     public static int Menu(){
         int responce; 
         Console.Out.WriteLine("\n\n");
         Console.Out.WriteLine("Welcome to the scripture memorization tool!");
         Console.Out.WriteLine("The options are:");
-        Console.Out.WriteLine("1: Display the Scripture");
-        Console.Out.WriteLine("2: Enter a new scripture");
+        Console.Out.WriteLine("1: Enter a new scripture");
+        Console.Out.WriteLine("2: Display the Scripture");
         Console.Out.WriteLine("3: Hide words in the scripture");
         Console.Out.WriteLine("4: Unhide all words");
         Console.Out.WriteLine("5: Redisplay the menu options");
