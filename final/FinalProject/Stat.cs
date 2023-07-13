@@ -1,5 +1,5 @@
-namespace Starfinder{
-class Stat{
+namespace Starfinder {
+class Stat {
     private int _stat, _modifier;
     private string _name;
     public Stat(){
@@ -25,7 +25,7 @@ class Stat{
     public virtual int GetModifier(){
         return _modifier;
     }
-    protected void EditStat(int newStat){
+    public virtual void EditStat(int newStat){
         _stat = newStat;
         _modifier = _stat / 2 - 5;
     }
@@ -34,6 +34,10 @@ class Stat{
     }
     public int GetStat(){
         return _stat;
+    }
+    public void AddStat(int modifier){
+        _stat += modifier;
+        _modifier = _stat / 2 - 5;
     }
 }
 }

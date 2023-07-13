@@ -1,5 +1,5 @@
-namespace Starfinder{
-class Skill : Stat{
+namespace Starfinder {
+class Skill : Stat {
     private int _classTraining, _skillMod;
     public Skill() : base(){
         _classTraining = 0;
@@ -25,20 +25,16 @@ class Skill : Stat{
         _classTraining = amountTrained;
         SetSkillMod();
     }
-    
     private void SetSkillMod(){
         _skillMod = base.GetModifier() + _classTraining;
     }
     public override int GetModifier(){
         return _skillMod;
     }
-    public void AddTraining(){
-        _classTraining++;
+    public override void EditStat(int newStat){
+        _classTraining = newStat;
         SetSkillMod();
     }
-    public void AddTraining(int amountTrained){
-        _classTraining += amountTrained;
-        SetSkillMod();
-    }
+    
 }
 }
