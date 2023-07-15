@@ -8,7 +8,7 @@ class Character {
     private List<Attribute> _details; // 0 Class, 1 Race, 2 Theme
     private int _maxHealthPoints, _maxStaminaPoints, _maxResolvePoints, _level;
     private int[] _charAlignment;
-    private string[,] _alignments = {{"Lawful Good","Neutral Good","Chaotic Good"}, {"Lawful Neutral","Neutral","Chaotic Neutral"}, {"Lawful Evil","Neutral Evil","Chaotic Evil"}};
+    private string[,] _alignments = {{"Lawful Good","Neutral Good","Chaotic Good"}, {"Lawful Neutral","Neutral","Chaotic Neutral"}, {"Lawful Evil","Neutral Evil","Chaotic Evil"}}; // Not Implmented
     private string[] _skillNames = {"STR", "DEX", "CON", "INT", "WIS", "CHA", "Acrobatics", "Athletics", "Bluff", "Computers", "Culture", "Diplomacy", "Discuise", "Engineering", "Intimidate", "Life Sciance", "Medicine", "Mysticism", "Preception", "Physical Science", "Piloting", "Sense Motive", "Slight of Hand", "Stealth", "Survival", "Profession 1", "Profession 2"};
     int[] _skillProf = {1, 0, 5, 3, 3, 5, 5, 3, 5, 3, 3, 4, 4, 3, 1, 4, 1, 1, 4, -1, -1};
     public Character(){
@@ -70,14 +70,13 @@ class Character {
         SetProficiancies();
         _level = 1;
         _details = new List<Attribute>();
-        _details.Add(new PlayerClass(attributes[0]));
         _details.Add(new Race(attributes[1]));
         _details.Add(new Theme(attributes[2]));
+        _details.Add(new PlayerClass(attributes[0]));
         foreach(Attribute detail in _details){
             detail.StartUp(_SkillScores);
             _maxHealthPoints += detail.GetHealth();
         }
-        _details[0].StartUp(_SkillScores);
         _maxHealthPoints += _SkillScores[2].GetModifier();
         PlayerClass placeholderclass = new PlayerClass(attributes[0]);
         _maxStaminaPoints = placeholderclass.GetStaminaBase() + _SkillScores[2].GetModifier();
@@ -97,9 +96,32 @@ class Character {
     private void SetProficiancies(){
         for(int i = 6; i < 24; i++){
             if(-1 != _skillProf[i-6]){
-                _SkillScores[i].EditStat(_SkillScores[_skillProf[i-6]].GetStat());
+                _SkillScores[i].EditStat(_SkillScores[_skillProf[i-6]].GetStat(), true);
             }
         }
-    } 
+    }
+    public string Display(){
+        string display = "\n";
+        display += "NAME: Put your Chareter's Name here\n";
+        display += $"Race: {this._details[1].GetName()}\n";
+        display += $"Class: {this._details[0].GetName()}\n";
+        display += $"Theme: {this._details[2].GetName()}\n";
+        display += $"Health | Stamina | Resolve\n";
+        display += $"{this._maxHealthPoints}|{this._maxStaminaPoints}|{this._maxResolvePoints}\n";
+        foreach(Stat stat in _SkillScores){
+            if(stat.GetType() == typeof(Stat)){
+                if(stat.GetModifier() > 0){
+                    display += $"{stat.GetName()}: {stat.GetStat()} (+{stat.GetModifier()})\n";
+                }else if(stat.GetModifier() < 0){
+                    display += $"{stat.GetName()}: {stat.GetStat()} ({stat.GetModifier()})\n";
+                }else{
+                    display += $"{stat.GetName()}: {stat.GetStat()}\n";
+                }    
+            }else{
+                display += $"{stat.GetName()}: {stat.GetModifier()}\n";
+            }
+        }
+        return display;
+    }
 }
 }

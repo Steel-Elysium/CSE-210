@@ -31,9 +31,16 @@ class Skill : Stat {
     public override int GetModifier(){
         return _skillMod;
     }
-    public override void EditStat(int newStat){
-        _classTraining = newStat;
-        SetSkillMod();
+    public override int GetStat(){
+        return -99999;
+    }
+    public override void EditStat(int newStat, bool setBaseStat = false){
+        if(!setBaseStat){
+            _classTraining += newStat;
+            SetSkillMod();
+        }else{
+            base.EditStat(newStat);
+        }
     }
     
 }

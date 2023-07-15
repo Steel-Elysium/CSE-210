@@ -25,18 +25,18 @@ class Stat {
     public virtual int GetModifier(){
         return _modifier;
     }
-    public virtual void EditStat(int newStat){
+    public virtual void EditStat(int newStat, bool setBaseStat = false){
         _stat = newStat;
         _modifier = _stat / 2 - 5;
     }
     public string GetName(){
         return _name;
     }
-    public int GetStat(){
+    public virtual int GetStat(){
         return _stat;
     }
-    public void AddStat(int modifier){
-        _stat += modifier;
+    public void AddStat(int statAddition){
+        _stat += statAddition;
         _modifier = _stat / 2 - 5;
     }
 }
