@@ -13,7 +13,7 @@ public class Prompts{
     private Random _randomNumber;
 
     public Prompts(){
-        _fileLocation = "./prompts.txt";
+        _fileLocation = "./prompts.csv";
         _prompts = FileManagement.ReadFile(_fileLocation);
         _randomNumber = new Random();
     }
@@ -23,7 +23,7 @@ public class Prompts{
         _randomNumber = new Random();
     }
     public Prompts(int randomSeed){
-        _fileLocation = "./prompts.txt";
+        _fileLocation = "./prompts.csv";
         _prompts = FileManagement.ReadFile(_fileLocation);
         _randomNumber = new Random(randomSeed);
     }

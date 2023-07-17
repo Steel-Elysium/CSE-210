@@ -13,7 +13,7 @@ class ConsoleMenu{
     Save the journal to a file - Prompt the user for a filename and then save the current journal (the complete list of entries) to that file location.
     Load the journal from a file - Prompt the user for a filename and then load the journal (a complete list of entries) from that file. This should replace any entries currently stored the journal.
     */
-    private Prompts queries = new Prompts();
+    private static Prompts queries = new Prompts();
 
     public static Journal Start(Journal currentJournal){
         return GoToMenu(currentJournal);
@@ -96,16 +96,29 @@ class ConsoleMenu{
         return newJournal;
     }
     public static Entry MakeEntry(){
-
+        Entry newEntry = new Entry();
+        string date, userInput, prompt = queries.GeneratePrompt();
+        date = DateTime.Now.ToString();
+        Console.Out.WriteLine($"Your Prompt is: {prompt}");
+        Console.Out.WriteLine("Write something about the Prompt: ");
+        userInput = Console.In.ReadLine();
+        newEntry.Store(prompt, userInput, date);
+        return newEntry;
     }
     public static void DisplayJournal(Journal currentJournal){
-
+        if(currentJournal.GetAllEntries().Count != 0){
+            foreach(Entry currentEntry in currentJournal.GetAllEntries()){
+                Console.Out.WriteLine(currentEntry.GetAsString());
+            }
+        }else{
+            Console.Out.WriteLine("No Entries have been made");
+        }
     }
     public static void SaveJournal(Journal currentJournal){
 
     }
     public static Journal LoadJournal(){
-
+        
     }
 }
 
